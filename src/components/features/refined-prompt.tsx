@@ -1,42 +1,16 @@
-import { useState } from "react";
 import { Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "@/components/ui/card";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 
 interface RefinedPromptProps {
   prompt: string;
 }
 
 export function RefinedPrompt({ prompt }: RefinedPromptProps) {
-  const [isCopying, setIsCopying] = useState(false);
-
-  const { toast } = useToast();
-
-  const copyToClipboard = async () => {
-    setIsCopying(true);
-    try {
-      await navigator.clipboard.writeText(prompt);
-
-      toast({
-        title: "Copied to clipboard",
-        description: "The refined prompt has been copied to your clipboard.",
-        duration: 2000,
-      });
-    } catch {
-      toast({
-        variant: "destructive",
-        title: "Failed to copy",
-        description:
-          "An error occurred while copying the text. Please try again.",
-        duration: 2000,
-      });
-    } finally {
-      setTimeout(() => {
-        setIsCopying(false);
-      }, 2000);
-    }
-  };
+  const { copyToClipboard, isCopying } = useCopyToClipboard({
+    message: prompt,
+  });
 
   return (
     <div className="mt-8">

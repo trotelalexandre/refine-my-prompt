@@ -2,14 +2,7 @@ import {
   formatOptions,
   roleSuggestions,
   toneOptions,
-} from "@/app/data/context-tone-options";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+} from "@/data/context-tone-options";
 import { Badge } from "../ui/badge";
 import { Input } from "../ui/input";
 
@@ -36,23 +29,24 @@ export function ContextToneOptions({
         <p className="text-sm font-semibold text-muted-foreground">
           Select a format
         </p>
-        <Select
-          value={selectedFormat ?? ""}
-          onValueChange={(e) => {
-            setFormatChange(e);
-          }}
-        >
-          <SelectTrigger className="w-[180px] bg-primary text-primary-foreground">
-            <SelectValue placeholder="Select format" />
-          </SelectTrigger>
-          <SelectContent className="bg-blue-50 dark:bg-blue-900 border border-blue-900/40 dark:border-blue-50/40">
-            {formatOptions.map((option) => (
-              <SelectItem key={option} value={option}>
-                {option}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <div className="flex flex-wrap gap-2">
+          {formatOptions.map((suggestedFormat) => (
+            <Badge
+              key={suggestedFormat}
+              variant={
+                selectedFormat === suggestedFormat ? "default" : "outline"
+              }
+              className={`cursor-pointer transition-all px-4 py-2 ${
+                suggestedFormat === selectedFormat ? "" : "bg-background"
+              }`}
+              onClick={() => {
+                setFormatChange(suggestedFormat);
+              }}
+            >
+              {suggestedFormat}
+            </Badge>
+          ))}
+        </div>
       </div>
 
       <div className="space-y-2">
@@ -64,7 +58,9 @@ export function ContextToneOptions({
             <Badge
               key={suggestedRole}
               variant={selectedRole === suggestedRole ? "default" : "outline"}
-              className={`cursor-pointer transition-all px-4 py-2`}
+              className={`cursor-pointer transition-all px-4 py-2 ${
+                selectedRole === suggestedRole ? "" : "bg-background"
+              }`}
               onClick={() => {
                 setRoleChange(suggestedRole);
               }}
@@ -96,7 +92,9 @@ export function ContextToneOptions({
             <Badge
               key={suggestedTone}
               variant={selectedTone === suggestedTone ? "default" : "outline"}
-              className={`cursor-pointer transition-all px-4 py-2`}
+              className={`cursor-pointer transition-all px-4 py-2 ${
+                selectedTone === suggestedTone ? "" : "bg-background"
+              }`}
               onClick={() => {
                 setToneChange(suggestedTone);
               }}

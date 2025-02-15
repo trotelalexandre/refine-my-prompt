@@ -26,17 +26,17 @@ export default function Home() {
   });
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="py-4 bg-background flex items-center justify-between px-4 md:px-12">
+    <div className="flex min-h-screen flex-col">
+      <header className="flex items-center justify-between bg-background px-4 py-4 md:px-12">
         <div className="flex items-center gap-4">
-          <h1 className="text-xl font-bold text-center">Refine My Prompt</h1>
+          <h1 className="text-center text-xl font-bold">Refine My Prompt</h1>
           <Badge className="text-white">Beta</Badge>
         </div>
 
         <ThemeToggle />
       </header>
 
-      <main className="flex-grow container max-w-3xl mx-auto px-4 pt-4 pb-12 sm:py-12 md:py-16">
+      <main className="container mx-auto max-w-3xl flex-grow px-4 pb-12 pt-4 sm:py-12 md:py-16">
         <div className="space-y-6 md:space-y-8">
           <div className="space-y-2">
             <form onSubmit={handleRefine} className="space-y-8">
@@ -66,7 +66,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="p-4 text-center text-sm text-muted-foreground bg-background border-t">
+      <footer className="border-t bg-background p-4 text-center text-sm text-muted-foreground">
         <p>
           Enter your prompt above and click &apos;Refine My Prompt&apos; to get
           an improved version.

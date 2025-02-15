@@ -21,7 +21,7 @@ export function PromptInput({
         placeholder="Enter your prompt here..."
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="min-h-[150px] bg-gray-50 dark:bg-gray-800 border-none ring-none md:!text-lg md:placeholder:text-lg p-4 rounded-xl focus:shadow-xl transition-all duration-200"
+        className="ring-none min-h-[150px] rounded-xl border-none bg-gray-50 p-4 transition-all duration-200 focus:shadow-xl dark:bg-gray-800 md:!text-lg md:placeholder:text-lg"
         maxLength={maxLength}
       />
 

@@ -14,7 +14,7 @@ interface UseRefiningProps {
   format: (typeof formatOptions)[number];
   complete: (
     prompt: string,
-    options?: RequestOptions
+    options?: RequestOptions,
   ) => Promise<string | null | undefined>;
 }
 

@@ -10,7 +10,7 @@ export function getRefinedPrompt(
   prompt: string,
   tone: string,
   role: string | null,
-  format: string | null
+  format: string | null,
 ): Response {
   const systemPrompt = `
   Refine the following prompt for clarity, specificity, and effectiveness while preserving its intent. Follow these guidelines:

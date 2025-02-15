@@ -36,7 +36,7 @@ export function ContextToneOptions({
               variant={
                 selectedFormat === suggestedFormat ? "default" : "outline"
               }
-              className={`cursor-pointer transition-all px-4 py-2 ${
+              className={`cursor-pointer px-4 py-2 transition-all ${
                 suggestedFormat === selectedFormat
                   ? "text-white"
                   : "bg-background hover:bg-muted"
@@ -60,7 +60,7 @@ export function ContextToneOptions({
             <Badge
               key={suggestedRole}
               variant={selectedRole === suggestedRole ? "default" : "outline"}
-              className={`cursor-pointer transition-all px-4 py-2 ${
+              className={`cursor-pointer px-4 py-2 transition-all ${
                 selectedRole === suggestedRole
                   ? "text-white"
                   : "bg-background hover:bg-muted"
@@ -96,7 +96,7 @@ export function ContextToneOptions({
             <Badge
               key={suggestedTone}
               variant={selectedTone === suggestedTone ? "default" : "outline"}
-              className={`cursor-pointer transition-all px-4 py-2 ${
+              className={`cursor-pointer px-4 py-2 transition-all ${
                 selectedTone === suggestedTone
                   ? "text-white"
                   : "bg-background hover:bg-muted"

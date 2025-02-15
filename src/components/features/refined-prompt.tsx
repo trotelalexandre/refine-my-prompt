@@ -13,11 +13,11 @@ export function RefinedPrompt({ prompt }: RefinedPromptProps) {
   });
 
   return (
-    <Card className="relative overflow-hidden bg-gray-50 dark:bg-gray-800 shadow-none border">
+    <Card className="relative overflow-hidden border bg-gray-50 shadow-none dark:bg-gray-800">
       <Button
         variant="ghost"
         size="icon"
-        className="absolute top-2 right-2 z-10"
+        className="absolute right-2 top-2 z-10"
         onClick={copyToClipboard}
         disabled={isCopying}
       >
@@ -29,7 +29,7 @@ export function RefinedPrompt({ prompt }: RefinedPromptProps) {
         <span className="sr-only">Copy refined prompt</span>
       </Button>
       <CardContent className="p-6">
-        <p className="text-muted-foreground md:text-lg leading-relaxed whitespace-pre-wrap">
+        <p className="whitespace-pre-wrap leading-relaxed text-muted-foreground md:text-lg">
           {prompt}
         </p>
       </CardContent>

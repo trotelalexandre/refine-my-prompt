@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     if (!prompt || !prompt.trim()) {
       return NextResponse.json(
         { error: "Prompt is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     console.error("Error refining prompt:", error);
     return NextResponse.json(
       { error: "Error refining prompt" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

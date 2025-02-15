@@ -8,13 +8,13 @@ import { useEffect, useState } from "react";
 export const useSavedSettings = () => {
   const [prompt, setPrompt] = useState("");
   const [tone, setTone] = useState<(typeof toneOptions)[number]>(
-    toneOptions[0]
+    toneOptions[0],
   );
   const [role, setRole] = useState<(typeof roleSuggestions)[number]>(
-    roleSuggestions[0]
+    roleSuggestions[0],
   );
   const [format, setFormat] = useState<(typeof formatOptions)[number]>(
-    formatOptions[0]
+    formatOptions[0],
   );
 
   useEffect(() => {

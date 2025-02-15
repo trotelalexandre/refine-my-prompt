@@ -8,6 +8,7 @@ import { useCompletion } from "@ai-sdk/react";
 import { useSavedSettings } from "@/hooks/use-saved-settings";
 import { useRefining } from "@/hooks/use-refining";
 import { ThemeToggle } from "@/components/global/theme-toggle";
+import { Badge } from "@/components/ui/badge";
 
 export default function Home() {
   const { prompt, tone, role, format, setPrompt, setTone, setRole, setFormat } =
@@ -25,22 +26,27 @@ export default function Home() {
   });
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
-      <header className="py-4 md:py-6 border-b bg-background flex items-center justify-between px-4">
-        <h1 className="text-2xl font-bold text-center flex-grow">
-          Refine My Prompt
-        </h1>
-        <div className="flex-shrink-0">
-          <ThemeToggle />
+    <div className="flex flex-col min-h-screen">
+      <header className="py-4 bg-background flex items-center justify-between px-4 md:px-12">
+        <div className="flex items-center gap-4">
+          <h1 className="text-xl font-bold text-center">Refine My Prompt</h1>
+          <Badge className="text-white">Beta</Badge>
         </div>
+
+        <ThemeToggle />
       </header>
 
-      <main className="flex-grow container max-w-3xl mx-auto px-4 py-12 md:py-16">
+      <main className="flex-grow container max-w-3xl mx-auto px-4 pt-4 pb-12 sm:py-12 md:py-16">
         <div className="space-y-6 md:space-y-8">
           <div className="space-y-2">
-            <form onSubmit={handleRefine} className="space-y-6">
+            <form onSubmit={handleRefine} className="space-y-8">
               <div>
-                <PromptInput value={prompt} onChange={setPrompt} />
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold text-muted-foreground">
+                    Enter your prompt
+                  </p>
+                  <PromptInput value={prompt} onChange={setPrompt} />
+                </div>
                 <ContextToneOptions
                   selectedFormat={format}
                   selectedRole={role}
@@ -63,7 +69,7 @@ export default function Home() {
       <footer className="p-4 text-center text-sm text-muted-foreground bg-background border-t">
         <p>
           Enter your prompt above and click &apos;Refine My Prompt&apos; to get
-          an improved version and earn points!
+          an improved version.
         </p>
       </footer>
     </div>

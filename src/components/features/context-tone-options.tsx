@@ -37,7 +37,9 @@ export function ContextToneOptions({
                 selectedFormat === suggestedFormat ? "default" : "outline"
               }
               className={`cursor-pointer transition-all px-4 py-2 ${
-                suggestedFormat === selectedFormat ? "" : "bg-background"
+                suggestedFormat === selectedFormat
+                  ? "text-white"
+                  : "bg-background hover:bg-muted"
               }`}
               onClick={() => {
                 setFormatChange(suggestedFormat);
@@ -59,7 +61,9 @@ export function ContextToneOptions({
               key={suggestedRole}
               variant={selectedRole === suggestedRole ? "default" : "outline"}
               className={`cursor-pointer transition-all px-4 py-2 ${
-                selectedRole === suggestedRole ? "" : "bg-background"
+                selectedRole === suggestedRole
+                  ? "text-white"
+                  : "bg-background hover:bg-muted"
               }`}
               onClick={() => {
                 setRoleChange(suggestedRole);
@@ -93,7 +97,9 @@ export function ContextToneOptions({
               key={suggestedTone}
               variant={selectedTone === suggestedTone ? "default" : "outline"}
               className={`cursor-pointer transition-all px-4 py-2 ${
-                selectedTone === suggestedTone ? "" : "bg-background"
+                selectedTone === suggestedTone
+                  ? "text-white"
+                  : "bg-background hover:bg-muted"
               }`}
               onClick={() => {
                 setToneChange(suggestedTone);

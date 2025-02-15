@@ -13,28 +13,26 @@ export function RefinedPrompt({ prompt }: RefinedPromptProps) {
   });
 
   return (
-    <div className="mt-8">
-      <Card className="relative overflow-hidden">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="absolute top-2 right-2 z-10"
-          onClick={copyToClipboard}
-          disabled={isCopying}
-        >
-          {isCopying ? (
-            <Check className="h-4 w-4" />
-          ) : (
-            <Copy className="h-4 w-4" />
-          )}
-          <span className="sr-only">Copy refined prompt</span>
-        </Button>
-        <CardContent className="p-6">
-          <p className="text-muted-foreground md:text-lg leading-relaxed whitespace-pre-wrap">
-            {prompt}
-          </p>
-        </CardContent>
-      </Card>
-    </div>
+    <Card className="relative overflow-hidden bg-gray-50 dark:bg-gray-800 shadow-none border">
+      <Button
+        variant="ghost"
+        size="icon"
+        className="absolute top-2 right-2 z-10"
+        onClick={copyToClipboard}
+        disabled={isCopying}
+      >
+        {isCopying ? (
+          <Check className="h-4 w-4" />
+        ) : (
+          <Copy className="h-4 w-4" />
+        )}
+        <span className="sr-only">Copy refined prompt</span>
+      </Button>
+      <CardContent className="p-6">
+        <p className="text-muted-foreground md:text-lg leading-relaxed whitespace-pre-wrap">
+          {prompt}
+        </p>
+      </CardContent>
+    </Card>
   );
 }

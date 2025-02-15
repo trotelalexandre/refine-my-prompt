@@ -12,7 +12,7 @@ export function RefineButton({ isLoading }: RefineButtonProps) {
   return (
     <Button
       type="submit"
-      className="relative w-full h-12 text-lg font-semibold bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 overflow-hidden"
+      className="relative w-full h-12 text-lg font-semibold bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white transition-all duration-200 active:shadow-xl rounded-xl active:scale-95 overflow-hidden"
       disabled={isLoading}
     >
       {isLoading ? (

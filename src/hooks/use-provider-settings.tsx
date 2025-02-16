@@ -4,10 +4,6 @@ import { useToast } from "./use-toast";
 
 export const useProviderSettings = () => {
   const [provider, setProvider] = useState<Provider>("default");
-  const [lmModel, setLmModel] = useState("");
-  const [lmPort, setLmPort] = useState("");
-  const [openaiApiKey, setOpenaiApiKey] = useState("");
-  const [mistralApiKey, setMistralApiKey] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [providerSettings, setProviderSettings] = useState<ProviderSettings>({
     lmstudio: {
@@ -30,48 +26,46 @@ export const useProviderSettings = () => {
     ) as Provider;
     if (savedProvider) setProvider(savedProvider);
 
-    const savedLmModel = localStorage.getItem("lmModel");
-    if (savedLmModel) setLmModel(savedLmModel);
-
-    const savedLmPort = localStorage.getItem("lmPort");
-    if (savedLmPort) setLmPort(savedLmPort);
-
-    const savedOpenaiApiKey = localStorage.getItem("openaiApiKey");
-    if (savedOpenaiApiKey) setOpenaiApiKey(savedOpenaiApiKey);
-
-    const savedMistraApiKey = localStorage.getItem("mistralApiKey");
-    if (savedMistraApiKey) setMistralApiKey(savedMistraApiKey);
+    const savedProviderSettings = localStorage.getItem("providerSettings");
+    if (savedProviderSettings) {
+      setProviderSettings(JSON.parse(savedProviderSettings));
+    }
   }, []);
 
   useEffect(() => {
     localStorage.setItem("provider", provider);
-    localStorage.setItem("lmModel", lmModel);
-    localStorage.setItem("lmPort", lmPort);
-    localStorage.setItem("openaiApiKey", openaiApiKey);
-    localStorage.setItem("mistralApiKey", mistralApiKey);
-  }, [provider, lmModel, lmPort, openaiApiKey, mistralApiKey]);
+    localStorage.setItem("providerSettings", JSON.stringify(providerSettings));
+  }, [provider, providerSettings]);
 
   useEffect(() => {
     setProviderSettings({
       lmstudio: {
-        lmModel,
-        lmPort,
+        lmModel: providerSettings?.lmstudio?.lmModel ?? "",
+        lmPort: providerSettings?.lmstudio?.lmPort ?? "",
       },
       openai: {
-        apiKey: openaiApiKey,
+        apiKey: providerSettings?.openai?.apiKey ?? "",
       },
       mistral: {
-        apiKey: mistralApiKey,
+        apiKey: providerSettings?.mistral?.apiKey ?? "",
       },
     });
-  }, [lmModel, lmPort, mistralApiKey, openaiApiKey]);
+  }, [
+    providerSettings?.lmstudio?.lmModel,
+    providerSettings?.lmstudio?.lmPort,
+    providerSettings?.mistral?.apiKey,
+    providerSettings?.openai?.apiKey,
+  ]);
 
   const validateSettings = useCallback(() => {
     setIsLoading(true);
 
     let isValid = true;
     switch (provider) {
-      case "lmstudio":
+      case "lmstudio": {
+        const lmModel = providerSettings.lmstudio?.lmModel;
+        const lmPort = providerSettings.lmstudio?.lmPort;
+
         if (!lmModel || !lmPort) {
           toast({
             title: "Missing settings",
@@ -81,7 +75,10 @@ export const useProviderSettings = () => {
           isValid = false;
         }
         break;
-      case "openai":
+      }
+      case "openai": {
+        const openaiApiKey = providerSettings.openai?.apiKey;
+
         if (!openaiApiKey) {
           toast({
             title: "Missing settings",
@@ -91,7 +88,10 @@ export const useProviderSettings = () => {
           isValid = false;
         }
         break;
-      case "mistral":
+      }
+      case "mistral": {
+        const mistralApiKey = providerSettings.mistral?.apiKey;
+
         if (!mistralApiKey) {
           toast({
             title: "Missing settings",
@@ -101,15 +101,24 @@ export const useProviderSettings = () => {
           isValid = false;
         }
         break;
-      default:
+      }
+      default: {
         break;
+      }
     }
 
     setTimeout(() => {
       setIsLoading(false);
     }, 500);
     return isValid;
-  }, [provider, lmModel, lmPort, openaiApiKey, mistralApiKey, toast]);
+  }, [
+    provider,
+    providerSettings.lmstudio?.lmModel,
+    providerSettings.lmstudio?.lmPort,
+    providerSettings.mistral?.apiKey,
+    providerSettings.openai?.apiKey,
+    toast,
+  ]);
 
   return {
     provider,

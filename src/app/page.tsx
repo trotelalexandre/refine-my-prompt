@@ -44,8 +44,12 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="flex items-center justify-between bg-background px-4 py-4 md:px-12">
-        <div className="flex items-center gap-4">
-          <h1 className="text-center text-xl font-bold">Refine My Prompt</h1>
+        <div className="flex items-center gap-2 md:gap-4">
+          <h1 className="hidden text-center text-xl font-bold md:block">
+            Refine My Prompt
+          </h1>
+          <h1 className="text-center text-xl font-bold md:hidden">RMP</h1>
+
           <Badge className="text-white">Beta</Badge>
         </div>
 

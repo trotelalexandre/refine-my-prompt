@@ -8,7 +8,7 @@ export const useProviderSettings = () => {
   const [providerSettings, setProviderSettings] = useState<ProviderSettings>({
     lmstudio: {
       lmModel: "",
-      lmPort: "",
+      lmBaseURL: "",
     },
     openai: {
       apiKey: "",
@@ -41,7 +41,7 @@ export const useProviderSettings = () => {
     setProviderSettings({
       lmstudio: {
         lmModel: providerSettings?.lmstudio?.lmModel ?? "",
-        lmPort: providerSettings?.lmstudio?.lmPort ?? "",
+        lmBaseURL: providerSettings?.lmstudio?.lmBaseURL ?? "",
       },
       openai: {
         apiKey: providerSettings?.openai?.apiKey ?? "",
@@ -52,7 +52,7 @@ export const useProviderSettings = () => {
     });
   }, [
     providerSettings?.lmstudio?.lmModel,
-    providerSettings?.lmstudio?.lmPort,
+    providerSettings?.lmstudio?.lmBaseURL,
     providerSettings?.mistral?.apiKey,
     providerSettings?.openai?.apiKey,
   ]);
@@ -64,9 +64,9 @@ export const useProviderSettings = () => {
     switch (provider) {
       case "lmstudio": {
         const lmModel = providerSettings.lmstudio?.lmModel;
-        const lmPort = providerSettings.lmstudio?.lmPort;
+        const lmBaseURL = providerSettings.lmstudio?.lmBaseURL;
 
-        if (!lmModel || !lmPort) {
+        if (!lmModel || !lmBaseURL) {
           toast({
             title: "Missing settings",
             description: "Please enter your LM Studio settings",
@@ -114,7 +114,7 @@ export const useProviderSettings = () => {
   }, [
     provider,
     providerSettings.lmstudio?.lmModel,
-    providerSettings.lmstudio?.lmPort,
+    providerSettings.lmstudio?.lmBaseURL,
     providerSettings.mistral?.apiKey,
     providerSettings.openai?.apiKey,
     toast,

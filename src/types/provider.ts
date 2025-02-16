@@ -1,7 +1,7 @@
 export type ProviderSettings = {
   lmstudio?: {
     lmModel: string;
-    lmPort: string;
+    lmBaseURL: string;
   };
   openai?: {
     apiKey: string;

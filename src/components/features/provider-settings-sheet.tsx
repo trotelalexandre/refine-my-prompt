@@ -20,7 +20,7 @@ export function ProviderSettingsSheet({
   validateSettings,
   isProviderLoading,
 }: ProviderSettingsSheetProps) {
-  const { isOpen, setIsOpen, lmModel, lmPort, openaiApiKey, mistralApiKey } =
+  const { isOpen, setIsOpen, lmModel, lmBaseURL, openaiApiKey, mistralApiKey } =
     useProviderSheet({ providerSettings });
 
   if (provider === "default") return null;
@@ -39,7 +39,7 @@ export function ProviderSettingsSheet({
                     ...providerSettings,
                     lmstudio: {
                       lmModel: e.target.value,
-                      lmPort,
+                      lmBaseURL: providerSettings?.lmstudio?.lmBaseURL ?? "",
                     },
                   })
                 }
@@ -47,19 +47,19 @@ export function ProviderSettingsSheet({
               />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium">Server Port</label>
+              <label className="text-sm font-medium">Base URL</label>
               <Input
-                value={lmPort}
+                value={lmBaseURL}
                 onChange={(e) =>
                   setProviderSettings({
                     ...providerSettings,
                     lmstudio: {
-                      lmModel,
-                      lmPort: e.target.value,
+                      lmModel: providerSettings?.lmstudio?.lmModel ?? "",
+                      lmBaseURL: e.target.value,
                     },
                   })
                 }
-                placeholder="Enter port"
+                placeholder="Enter base URL (i.e. http://localhost:1234)"
               />
             </div>
           </>

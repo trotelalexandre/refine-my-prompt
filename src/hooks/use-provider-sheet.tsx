@@ -14,8 +14,8 @@ export const useProviderSheet = ({
     () => providerSettings.lmstudio?.lmModel ?? "",
     [providerSettings],
   );
-  const lmPort = useMemo(
-    () => providerSettings.lmstudio?.lmPort ?? "",
+  const lmBaseURL = useMemo(
+    () => providerSettings.lmstudio?.lmBaseURL ?? "",
     [providerSettings],
   );
   const openaiApiKey = useMemo(
@@ -31,7 +31,7 @@ export const useProviderSheet = ({
     isOpen,
     setIsOpen,
     lmModel,
-    lmPort,
+    lmBaseURL,
     openaiApiKey,
     mistralApiKey,
   };

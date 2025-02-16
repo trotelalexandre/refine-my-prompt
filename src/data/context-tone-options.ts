@@ -1,9 +1,4 @@
-export const formatOptions = [
-  "Paragraph",
-  "List",
-  "Bullet Points",
-  "Numbered List",
-];
+export const formatOptions = ["Paragraph", "Bullet Points", "Numbered List"];
 
 export const roleSuggestions = [
   "Marketing Expert",

@@ -1,30 +1,16 @@
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
-import {
-  formatOptions,
-  roleSuggestions,
-  toneOptions,
-} from "@/data/context-tone-options";
 import { RequestOptions } from "ai";
 
 interface UseRefiningProps {
   prompt: string;
-  tone: (typeof toneOptions)[number];
-  role: (typeof roleSuggestions)[number];
-  format: (typeof formatOptions)[number];
   complete: (
     prompt: string,
     options?: RequestOptions,
   ) => Promise<string | null | undefined>;
 }
 
-export const useRefining = ({
-  prompt,
-  tone,
-  role,
-  format,
-  complete,
-}: UseRefiningProps) => {
+export const useRefining = ({ prompt, complete }: UseRefiningProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { toast } = useToast();
@@ -41,7 +27,7 @@ export const useRefining = ({
     }
 
     setIsLoading(true);
-    await complete(prompt, { body: { tone, role, format } })
+    await complete(prompt)
       .catch((error) => {
         toast({
           variant: "destructive",

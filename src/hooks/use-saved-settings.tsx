@@ -16,6 +16,7 @@ export const useSavedSettings = () => {
   const [format, setFormat] = useState<(typeof formatOptions)[number]>(
     formatOptions[0],
   );
+  const [provider, setProvider] = useState("default");
 
   useEffect(() => {
     const savedPrompt = localStorage.getItem("prompt");
@@ -36,7 +37,18 @@ export const useSavedSettings = () => {
     localStorage.setItem("tone", JSON.stringify(tone));
     localStorage.setItem("role", JSON.stringify(role));
     localStorage.setItem("format", JSON.stringify(format));
-  }, [prompt, tone, role, format]);
+  }, [prompt, tone, role, format, provider]);
 
-  return { prompt, setPrompt, tone, setTone, role, setRole, format, setFormat };
+  return {
+    prompt,
+    setPrompt,
+    tone,
+    setTone,
+    role,
+    setRole,
+    format,
+    setFormat,
+    provider,
+    setProvider,
+  };
 };

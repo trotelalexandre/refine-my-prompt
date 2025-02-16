@@ -15,7 +15,7 @@ export const getModelFromProvider = (
 ) => {
   const lmstudio = createOpenAICompatible({
     name: "lmstudio",
-    baseURL: `${providerSettings?.lmstudio?.baseUrl}/v1`,
+    baseURL: `${providerSettings?.lmstudio?.lmBaseURL}/v1`,
   });
   const lmModel = lmstudio(providerSettings?.lmstudio?.lmModel ?? "");
 

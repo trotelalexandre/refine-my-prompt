@@ -9,19 +9,35 @@ import { useSavedSettings } from "@/hooks/use-saved-settings";
 import { useRefining } from "@/hooks/use-refining";
 import { ThemeToggle } from "@/components/global/theme-toggle";
 import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useProviderSettings } from "@/hooks/use-provider-settings";
+import { Provider } from "@/types/provider";
+import { ProviderSettingsSheet } from "@/components/features/provider-settings-sheet";
 
 export default function Home() {
+  const {
+    provider,
+    setProvider,
+    providerSettings,
+    setProviderSettings,
+    validateSettings,
+    isLoading: isProviderLoading,
+  } = useProviderSettings();
+
   const { prompt, tone, role, format, setPrompt, setTone, setRole, setFormat } =
     useSavedSettings();
   const { completion, complete } = useCompletion({
     api: "/api/refine",
-    body: { tone, role, format },
+    body: { tone, role, format, provider, providerSettings },
   });
   const { isLoading, handleRefine } = useRefining({
     prompt,
-    tone,
-    role,
-    format,
     complete,
   });
 
@@ -33,7 +49,33 @@ export default function Home() {
           <Badge className="text-white">Beta</Badge>
         </div>
 
-        <ThemeToggle />
+        <div className="flex items-center gap-2">
+          <Select
+            value={provider}
+            onValueChange={(value) => setProvider(value as Provider)}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select a provider" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="default">Default</SelectItem>
+              <SelectItem value="lmstudio">LM Studio</SelectItem>
+              <SelectItem value="openai">OpenAI</SelectItem>
+              <SelectItem value="mistral">Mistral</SelectItem>
+            </SelectContent>
+          </Select>
+
+          <ProviderSettingsSheet
+            {...{
+              provider,
+              providerSettings,
+              setProviderSettings,
+              validateSettings,
+              isProviderLoading,
+            }}
+          />
+          <ThemeToggle />
+        </div>
       </header>
 
       <main className="container mx-auto max-w-3xl flex-grow px-4 pb-12 pt-4 sm:py-12 md:py-16">
